@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info" strict="true">
+    <properties>
+        <!-- 日志备份目录 -->
+        <property name="projectName">java.learning.websocket</property>
+        <property name="LOG_HOME">../logs/${projectName}</property>
+    </properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %c %M %L [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+        <!-- 本日志只用作查看，所以不进行追加内容 -->
+        <File name="log" fileName="${LOG_HOME}/log.log" append="false">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %c %M %L [%t] %-5level %logger{36} - %msg%n" charset="UTF-8"/>
+        </File>
+        <File name="error" fileName="${LOG_HOME}/error.log" append="true">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %c %M %L [%t] %-5level %logger{36} - %msg%n" charset="UTF-8"/>
+        </File>
+        <!-- 日志文件分割规则 按照天分割 -->
+        <RollingFile name="RollingFile" fileName="${LOG_HOME}/${projectName}.log" filePattern="../logs/%d{yyyy-MM-dd}/%d{yyyy-MM-dd}-%i.log" ignoreExceptions="false">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %c %M %L [%t] %-5level %logger{36} - %msg%n" charset="UTF-8" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10M"/>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- 第三方日志系统 org.*全部屏蔽 -->
+        <logger name="org" level="error"/>
+
+        <Root level="info">
+            <AppenderRef ref="RollingFile"/>
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="log"/>
+            <AppenderRef ref="error"/>
+        </Root>
+
+    </Loggers>
+
+</Configuration>
+        <!--
+            %t：线程名称
+            %p：日志级别
+            %c：日志消息所在类名
+            %m：消息内容
+            %M：输出执行方法
+            %d：发生时间，%d{yyyy-MM-dd HH:mm:ss,SSS}，输出类似：2011-10-18 22:10:28,921
+            %x: 输出和当前线程相关联的NDC(嵌套诊断环境),尤其用到像java servlets这样的多客户多线程的应用中。
+            %L：代码中的行数
+            %n：换行
+         -->
