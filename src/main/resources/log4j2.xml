@@ -10,10 +10,10 @@
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c %M %L %-5level %logger{36} - %msg%n" />
         </Console>
         <!-- 本日志只用作查看，所以不进行追加内容 -->
-        <File name="log" fileName="${LOG_HOME}/log.log" append="false">
+        <File name="log" fileName="${LOG_HOME}/log/log.log" append="false">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c %M %L  %-5level %logger{36} - %msg%n" charset="UTF-8"/>
         </File>
-        <File name="error" fileName="${LOG_HOME}/error.log" append="true">
+        <File name="error" fileName="${LOG_HOME}/error/error.log" append="true">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c %M %L %-5level %logger{36} - %msg%n" charset="UTF-8"/>
         </File>
         <!-- 日志文件分割规则 按照天分割 -->
